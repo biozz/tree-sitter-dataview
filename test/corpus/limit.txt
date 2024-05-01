@@ -1,0 +1,18 @@
+=======================================
+Just a limit with a number
+=======================================
+LIST
+FROM #foo
+LIMIT 10
+
+---
+
+(dataview
+  (list
+    (keyword_list))
+  (from
+    (keyword_from)
+    (source_tag))
+  (limit
+    (keyword_limit)
+    (limit_number)))

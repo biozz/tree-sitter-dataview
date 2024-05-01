@@ -1,0 +1,48 @@
+{
+  "name": "tree-sitter-dataview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "types": "bindings/node",
+  "scripts": {
+    "test": "tree-sitter generate && tree-sitter test",
+    "generate": "tree-sitter generate",
+    "playground": "tree-sitter playground",
+    "build_wasm": "tree-sitter build --wasm",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
+  },
+  "keywords": [],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "author": "Ivan Elfimov <ielfimov@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.5",
+    "prebuildify": "^6.0.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.dataview",
+      "injection-regex": "^dataview$"
+    }
+  ]
+}

@@ -1,0 +1,450 @@
+{
+  "name": "dataview",
+  "rules": {
+    "dataview": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_query_type"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "from"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "sort"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "limit"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "group_by"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_newline": {
+      "type": "PATTERN",
+      "value": "\\n"
+    },
+    "_double_quoted_string": {
+      "type": "PATTERN",
+      "value": "\"[^\"]*\""
+    },
+    "keyword_list": {
+      "type": "PATTERN",
+      "value": "[lL][iI][sS][tT]"
+    },
+    "keyword_table": {
+      "type": "PATTERN",
+      "value": "[tT][aA][bB][lL][eE]"
+    },
+    "keyword_task": {
+      "type": "PATTERN",
+      "value": "[tT][aA][sS][kK]"
+    },
+    "keyword_calendar": {
+      "type": "PATTERN",
+      "value": "[cC][aA][lL][eE][nN][dD][aA][rR]"
+    },
+    "keyword_as": {
+      "type": "PATTERN",
+      "value": "[aA][sS]"
+    },
+    "keyword_from": {
+      "type": "PATTERN",
+      "value": "[fF][rR][oO][mM]"
+    },
+    "keyword_without_id": {
+      "type": "PATTERN",
+      "value": "[wW][iI][tT][hH][oO][uU][tT][  ][iI][dD]"
+    },
+    "keyword_where": {
+      "type": "PATTERN",
+      "value": "[wW][hH][eE][rR][eE]"
+    },
+    "keyword_sort": {
+      "type": "PATTERN",
+      "value": "[sS][oO][rR][tT]"
+    },
+    "keyword_group_by": {
+      "type": "PATTERN",
+      "value": "[gG][rR][oO][uU][pP][  ][bB][yY]"
+    },
+    "keyword_limit": {
+      "type": "PATTERN",
+      "value": "[lL][iI][mM][iI][tT]"
+    },
+    "keyword_flatten": {
+      "type": "PATTERN",
+      "value": "[fF][lL][aA][tT][tT][eE][nN]"
+    },
+    "keyword_asc": {
+      "type": "PATTERN",
+      "value": "[aA][sS][cC]"
+    },
+    "keyword_desc": {
+      "type": "PATTERN",
+      "value": "[dD][eE][sS][cC]"
+    },
+    "_query_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "list"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "table"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "task"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "calendar"
+        }
+      ]
+    },
+    "list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_list"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "keyword_without_id"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_terms"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "table": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_table"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "keyword_without_id"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_terms"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "task": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_task"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_terms"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "calendar": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_calendar"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_terms"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_terms": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "term"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "term"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "term": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "aliased_identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          ]
+        }
+      ]
+    },
+    "_word": {
+      "type": "PATTERN",
+      "value": "\\w+"
+    },
+    "_file_prop": {
+      "type": "PATTERN",
+      "value": "file\\.\\w+"
+    },
+    "identifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_word"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_file_prop"
+        }
+      ]
+    },
+    "aliased_identifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_as"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "alias"
+        }
+      ]
+    },
+    "alias": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_double_quoted_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_word"
+        }
+      ]
+    },
+    "from": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_from"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_source"
+        }
+      ]
+    },
+    "_source": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "source_folder"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "source_tag"
+        }
+      ]
+    },
+    "source_folder": {
+      "type": "SYMBOL",
+      "name": "_double_quoted_string"
+    },
+    "source_tag": {
+      "type": "PATTERN",
+      "value": "#\\w+"
+    },
+    "sort": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_sort"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "sort_direction"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "sort_direction": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_asc"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_desc"
+        }
+      ]
+    },
+    "limit": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_limit"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "limit_number"
+        }
+      ]
+    },
+    "limit_number": {
+      "type": "PATTERN",
+      "value": "\\d+"
+    },
+    "group_by": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_group_by"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s\\n"
+    },
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}

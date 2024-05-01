@@ -1,0 +1,56 @@
+=======================================
+A bunch of single word fields
+=======================================
+LIST foo, bar, buz
+
+---
+
+(dataview
+  (list
+    (keyword_list)
+    (term
+      (identifier))
+    (term
+      (identifier))
+    (term
+      (identifier))))
+
+=======================================
+A couple of aliased fields
+=======================================
+LIST foo AS bar, buz AS cuux
+
+---
+
+(dataview
+  (list
+    (keyword_list)
+    (term
+      (aliased_identifier
+        (identifier)
+        (keyword_as)
+        (alias)))
+    (term
+      (aliased_identifier
+        (identifier)
+        (keyword_as)
+        (alias)))))
+
+=======================================
+File identifier
+=======================================
+LIST read_at, file.mtime
+FROM "Books"
+
+---
+
+(dataview
+  (list
+    (keyword_list)
+    (term
+      (identifier))
+    (term
+      (identifier)))
+  (from
+    (keyword_from)
+    (source_folder)))

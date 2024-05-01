@@ -1,0 +1,29 @@
+=======================================
+Folder
+=======================================
+LIST
+FROM "Books"
+
+---
+
+(dataview
+  (list
+    (keyword_list))
+  (from
+    (keyword_from)
+    (source_folder)))
+
+=======================================
+Tag
+=======================================
+LIST
+FROM #foo
+
+---
+
+(dataview
+  (list
+    (keyword_list))
+  (from
+    (keyword_from)
+    (source_tag)))

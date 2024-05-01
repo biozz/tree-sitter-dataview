@@ -1,0 +1,43 @@
+=======================================
+Minimal query - LIST
+=======================================
+LIST
+
+---
+
+(dataview
+  (list
+    (keyword_list)))
+
+=======================================
+Minimal query - TASK
+=======================================
+TASK
+
+---
+
+(dataview
+  (task
+    (keyword_task)))
+
+=======================================
+Minimal query - TABLE
+=======================================
+TABLE
+
+---
+
+(dataview
+  (table
+    (keyword_table)))
+
+=======================================
+Minimal query - CALENDAR
+=======================================
+CALENDAR
+
+---
+
+(dataview
+  (calendar
+    (keyword_calendar)))
