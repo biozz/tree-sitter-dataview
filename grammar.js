@@ -1,7 +1,9 @@
-// NOTE:DataView is DQL and is read line-by-line, it is not like SQL.
+// NOTE:DataView is DQL and is read top-to-bottom, it is not like SQL.
 // But we can still use lots of stuff from SQL parsers:
 // - https://github.com/DerekStride/tree-sitter-sql
 // - https://github.com/m-novikov/tree-sitter-sql
+// DataView DQL is also a subset of JavaScript and it might be helpful
+// to borrow something from it.
 
 module.exports = grammar({
   name: 'dataview',
@@ -23,7 +25,6 @@ module.exports = grammar({
     _newline: _ => /\n/,
     _double_quoted_string: _ => /"[^"]*"/,
 
-
     keyword_list: _ => make_keyword("list"),
     keyword_table: _ => make_keyword("table"),
     keyword_task: _ => make_keyword("task"),
@@ -37,7 +38,9 @@ module.exports = grammar({
     keyword_limit: _ => make_keyword("limit"),
     keyword_flatten: _ => make_keyword("flatten"),
     keyword_asc: _ => make_keyword("asc"),
+    keyword_ascending: _ => make_keyword("ascending"),
     keyword_desc: _ => make_keyword("desc"),
+    keyword_descending: _ => make_keyword("descending"),
 
     _query_type: $ => choice(
       $.list,
@@ -116,7 +119,12 @@ module.exports = grammar({
         $.identifier,
         optional($.sort_direction),
     ),
-    sort_direction: $ => choice($.keyword_asc, $.keyword_desc),
+    sort_direction: $ => choice(
+      $.keyword_asc,
+      $.keyword_ascending,
+      $.keyword_desc,
+      $.keyword_descending,
+    ),
 
     limit: $ => seq(
         $.keyword_limit,
